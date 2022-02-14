@@ -119,8 +119,8 @@ app.component('productModal', {
 
       axios[http](url, { data: this.tempProduct }).then((response) => {
         alert(response.data.message);
+        this.$emit('get-products')
         productModal.hide();
-        this.$emit('get-products');
         // this.getData(); 無getData(外層方法)
       }).catch((err) => {
         alert(err.data.message);
