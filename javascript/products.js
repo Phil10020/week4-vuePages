@@ -63,6 +63,7 @@ const app = createApp({
         this.pagination = response.data.pagination;
       }).catch((err) => {
         alert(err.data.message);
+        window.location = 'index.html';
       })
     },
     
@@ -105,6 +106,12 @@ const app = createApp({
 app.component('productModal', {
   props:['tempProduct','isNew'],
   template:'#templateForProductModal' ,
+  data(){
+    return {
+      apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+      apiPath: 'phil',
+    }
+  },
   methods:{
     updateProduct() {
       let url = `${apiUrl}/api/${apiPath}/admin/product`;
@@ -119,8 +126,8 @@ app.component('productModal', {
 
       axios[http](url, { data: this.tempProduct }).then((response) => {
         alert(response.data.message);
-        this.$emit('get-products')
         productModal.hide();
+        this.$emit('get-products');
         // this.getData(); 無getData(外層方法)
       }).catch((err) => {
         alert(err.data.message);
